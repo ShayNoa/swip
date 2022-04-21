@@ -6,7 +6,7 @@ from typing import Optional, Set, Tuple
 import common.utils as utils
 from common.exceptions import CheckoutError, CommitRequiredError
 from common.paths import PATHS as path_to
-from common.utils import logger
+from common.utils import logger, HEAD
 
 from commands.status import get_status_info, print_status
 
@@ -81,15 +81,6 @@ def paths_to_ignore(untracked_files: Set[Optional[Path]]) -> Set[Optional[Path]]
     return paths_to_ignore  
 
 
-def update_ref_head(commit_id: str) -> None:  ## change this function, don't assume head is file's first line
-    with open(path_to.references, "r") as file:
-        ref_txt = file.readlines()
-        _, current_commit_id = ref_txt[0][len("HEAD="):].strip()
-        ref_txt[0] = ref_txt[0].replace(current_commit_id, commit_id)
-
-    with open(path_to.references, "w") as file:
-        file.writelines(ref_txt)
-            
 
 def update_active_branch(branch_name: str) -> None:
     """Overwrites activated file to contain the given branch,
@@ -123,7 +114,7 @@ def checkout(destination: str) -> bool:
 
     if branch:
         update_active_branch(branch)
-    update_ref_head(commit_id)
+    utils.update_ref_head(commit_id)
     logger.info(f'Switched to {destination}') 
     return True   
     
