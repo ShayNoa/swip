@@ -23,3 +23,6 @@ install via pip
 * `swip log` shows the current barnch commit history starting from HEAD.  
     To get all branches history, use `-all`.  
     To get a graph visualization use `-graph`.
+* `swip merge` incorporates changes from a given branch into the current active branch.  
+    Currently this is a basic implementation of git merge meaning merge conflicts  
+    handled by commiting the last changed files.
