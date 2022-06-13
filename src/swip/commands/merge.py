@@ -7,7 +7,7 @@ from swip.common.exceptions import CommitRequiredError, MergeError, NoBranchErro
 from swip.common.paths import PATHS as path_to
 from swip.common.helpers import logger
 
-import swip.commands.log
+import swip.commands.log as log
 from swip.commands.commit import commit
 from swip.commands.status import get_status_info, print_status
 
@@ -34,8 +34,8 @@ def find_mutual_ancestor(head_commit, branch_commit):
     """
     active_history = []
     branch_history = []
-    commands.log.get_branch_history(head_commit, active_history)
-    commands.log.get_branch_history(branch_commit, branch_history)
+    log.get_branch_history(head_commit, active_history)
+    log.get_branch_history(branch_commit, branch_history)
     active_parents =  [commit['commit'] for commit in active_history]
     branch_parents = [commit['commit'] for commit in branch_history]
     for commit in branch_parents:
@@ -75,7 +75,7 @@ def update_staging_area(
     """Copies all changed files and added files 
     (including missing parents) to staging area.
     """
-    files_to_copy = added_files + changed_files
+    files_to_copy = added_files.union(changed_files) 
     for file in files_to_copy:
         helpers.copy_file_to_staging(branch_dir, file) 
     copy_changed_files(changed_files, branch_dir)

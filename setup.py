@@ -6,7 +6,7 @@ setup(
     packages=find_packages(where='src'),
     package_dir={"": "src"},
     include_package_data=True,
-    version='0.1.5',
+    version='0.1.6',
     license='MIT',
     description='swip is a basic version control system, based on Git.',
     author='Noa Shay',

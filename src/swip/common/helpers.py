@@ -77,13 +77,13 @@ def validate_ref_file_exists():
         )
 
 
-def update_ref_head(ref, commit_id: str) -> None: 
-    with open(ref, "r") as file:
+def update_ref_head(commit_id: str) -> None: 
+    with open(path_to.references, "r") as file:
         ref_txt = file.readlines()
         _, current_commit_id = ref_txt[0].strip().split('=')
         ref_txt[0] = ref_txt[0].replace(current_commit_id, commit_id)
     
-    with open(ref, "w") as file:
+    with open(path_to.references, "w") as file:
         file.writelines(ref_txt)
         
 

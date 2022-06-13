@@ -93,7 +93,7 @@ def checkout(destination: str) -> bool:
     """Checks out a branch or a commit id.
     The given content of the commit id or HEAD of
     given branch will be copied to the working
-    directory and staging area.
+    directory and the staging area.
     """
     try:
         status = get_status_info()
