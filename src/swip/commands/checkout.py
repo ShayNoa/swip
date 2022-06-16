@@ -76,7 +76,7 @@ def paths_to_ignore(untracked_files: Set[Optional[Path]]) -> Set[Optional[Path]]
     for path in untracked_files:
         path = working_dir / path
         while path != working_dir:
-            paths_to_ignore.add(path) 
+            paths_to_ignore.add(path.relative_to(working_dir)) 
             path = path.parent
     return paths_to_ignore  
 

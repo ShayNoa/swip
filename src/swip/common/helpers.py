@@ -168,6 +168,7 @@ def update_working_dir(
     If paths_to_keep is given, these files and dirs paths will
     also be ignored in the updating process.
     """
+
     working_dir_paths = get_rel_paths(path_to.working_dir, exclude_swip=True)
     if paths_to_keep:
         working_dir_paths = working_dir_paths - paths_to_keep
